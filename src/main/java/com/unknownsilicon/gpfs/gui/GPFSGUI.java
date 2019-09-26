@@ -3,6 +3,9 @@ package com.unknownsilicon.gpfs.gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
+import com.unknownsilicon.gpfs.GooglePhotosFileStorage;
+import com.unknownsilicon.gpfs.photosAPI.DuplicateNameException;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -12,8 +15,7 @@ import net.lingala.zip4j.exception.ZipException;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JList;
 
-import org.unknownsilicon.gpfs.GooglePhotosFileStorage;
-import org.unknownsilicon.gpfs.photosAPI.DuplicateNameException;
+
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -26,7 +28,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-public class GPSFSGUI {
+public class GPFSGUI {
 
 	private JFrame frame;
 	private GooglePhotosFileStorage gpfs;
@@ -38,7 +40,7 @@ public class GPSFSGUI {
 	public static void main(String[] args) {
 		EventQueue.invokeLater((Runnable) () -> {
 			try {
-				GPSFSGUI window = new GPSFSGUI();
+				GPFSGUI window = new GPFSGUI();
 				window.frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -49,7 +51,7 @@ public class GPSFSGUI {
 	/**
 	 * Create the application.
 	 */
-	public GPSFSGUI() {
+	public GPFSGUI() {
 		gpfs = new GooglePhotosFileStorage();
 		fileChooser = new JFileChooser();
 		initialize();
