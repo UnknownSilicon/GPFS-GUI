@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+}
+
+group 'com.unknownsilicon'
+version 'v1.0.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+jar {
+    from {
+        configurations.compile.collect {it}
+    }
+
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+
+    manifest {
+        attributes (
+            'Class-Path': configurations.compile.collect { it.getName()}.join(' '),
+            'Manifest-Version': version,
+            'Main-Class': 'com.unknownsilicon.gpfs.gui.GPFSGUI'
+        )
+    }
+}
+
+task fatJar(type: Jar) {
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+
+    manifest {
+        attributes (
+                'Class-Path': configurations.compile.collect { it.getName()}.join(' '),
+                'Manifest-Version': version,
+                'Main-Class': 'com.unknownsilicon.gpfs.gui.GPFSGUI'
+        )
+    }
+    
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+//buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
